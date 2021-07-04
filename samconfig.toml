@@ -1,0 +1,11 @@
+version = 0.1
+[default]
+[default.deploy]
+[default.deploy.parameters]
+stack_name = "trabalhofinal"
+s3_bucket = "aws-sam-cli-managed-default-samclisourcebucket-184pboge602fc"
+s3_prefix = "trabalhofinal"
+region = "sa-east-1"
+profile = "PersonalKey"
+confirm_changeset = true
+capabilities = "CAPABILITY_IAM"
