@@ -8,6 +8,9 @@ import com.amazonaws.services.lambda.runtime.RequestHandler
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent
 import com.fasterxml.jackson.databind.ObjectMapper
+import data.Order
+import java.io.IOException
+import java.util.*
 
 class App : RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
 
@@ -18,9 +21,19 @@ class App : RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseE
     private var mapper: DynamoDBMapper = DynamoDBMapper(dynamoDB)
     var objectMapper: ObjectMapper = ObjectMapper()
 
-    override fun handleRequest(input: APIGatewayProxyRequestEvent?, context: Context?): APIGatewayProxyResponseEvent {
+    override fun handleRequest(input: APIGatewayProxyRequestEvent, context: Context): APIGatewayProxyResponseEvent {
         // Get user with given id at body
         // Save order at db
+        val order = objectMapper.readValue(input.body, Order::class.java)
+        order.orderId = UUID.randomUUID().toString()
+
+        val response = APIGatewayProxyResponseEvent()
+
+        return try {
+            response.withStatusCode(200)
+        } catch (exception: IOException) {
+            response.withStatusCode(500)
+        }
     }
 
 
