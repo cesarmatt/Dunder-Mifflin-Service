@@ -11,6 +11,7 @@ import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent
 import com.fasterxml.jackson.databind.ObjectMapper
 import data.Customer
 import java.io.IOException
+import java.util.*
 
 class App : RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
 
@@ -23,6 +24,7 @@ class App : RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseE
 
     override fun handleRequest(input: APIGatewayProxyRequestEvent, context: Context): APIGatewayProxyResponseEvent {
         val customer = objectMapper.readValue(input.body, Customer::class.java)
+        customer.customerId = UUID.randomUUID().toString()
         mapper.save(customer)
 
         val response = APIGatewayProxyResponseEvent()

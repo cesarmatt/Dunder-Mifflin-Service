@@ -4,6 +4,7 @@
   <component name="FrameworkDetectionExcludesConfiguration">
     <file type="web" url="file://$PROJECT_DIR$/GetCustomerService" />
     <file type="web" url="file://$PROJECT_DIR$/SaveCustomerService" />
+    <file type="web" url="file://$PROJECT_DIR$/SaveOrderService" />
   </component>
   <component name="ProjectRootManager" version="2" project-jdk-name="corretto-11" project-jdk-type="JavaSDK" />
 </project>
