@@ -1,14 +1,3 @@
-plugins {
-    id "org.jetbrains.kotlin.jvm" version "1.5.20"
-}
-
-repositories {
-    mavenCentral()
-}
-
 dependencies {
-    implementation 'com.amazonaws:aws-lambda-java-core:1.2.1'
-    implementation 'com.amazonaws:aws-lambda-java-events:3.6.0'
-    implementation 'com.amazonaws:aws-java-sdk-dynamodb:1.11.548'
-    testImplementation 'junit:junit:4.13.1'
+    implementation project(':Commons')
 }

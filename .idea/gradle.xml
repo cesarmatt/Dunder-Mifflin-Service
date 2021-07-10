@@ -5,28 +5,16 @@
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
         <option name="distributionType" value="DEFAULT_WRAPPED" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/GetCustomerService" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="modules">
           <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/Commons" />
             <option value="$PROJECT_DIR$/GetCustomerService" />
-          </set>
-        </option>
-      </GradleProjectSettings>
-      <GradleProjectSettings>
-        <option name="distributionType" value="DEFAULT_WRAPPED" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/SaveCustomerService" />
-        <option name="gradleJvm" value="corretto-11" />
-        <option name="modules">
-          <set>
+            <option value="$PROJECT_DIR$/GetItemService" />
+            <option value="$PROJECT_DIR$/GetOrderService" />
+            <option value="$PROJECT_DIR$/GetSalesmanService" />
             <option value="$PROJECT_DIR$/SaveCustomerService" />
-          </set>
-        </option>
-      </GradleProjectSettings>
-      <GradleProjectSettings>
-        <option name="distributionType" value="DEFAULT_WRAPPED" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/SaveOrderService" />
-        <option name="modules">
-          <set>
             <option value="$PROJECT_DIR$/SaveOrderService" />
           </set>
         </option>

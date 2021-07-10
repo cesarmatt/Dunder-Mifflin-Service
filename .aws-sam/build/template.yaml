@@ -57,20 +57,109 @@ Resources:
           - dynamodb:*
           Resource:
           - Fn::Sub: arn:${AWS::Partition}:dynamodb:${AWS::Region}:${AWS::AccountId}:table/customer
-Outputs:
-  SaveCustomerApi:
-    Description: API Gateway endpoint URL for Prod stage for Save Customer function
-    Value:
-      Fn::Sub: https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/savecustomer/
-  SaveCustomerFunction:
-    Description: Save Customer Lambda Function ARN
-    Value:
-      Fn::GetAtt:
-      - SaveCustomerService
-      - Arn
-  SaveCustomerFunctionIamRole:
-    Description: Implicit IAM Role created for Save Customer function
-    Value:
-      Fn::GetAtt:
-      - SaveCustomerServiceRole
-      - Arn
+  SaveOrderService:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: SaveOrderService
+      Handler: saveorder.App::handleRequest
+      Runtime: java11
+      MemorySize: 512
+      Environment:
+        Variables:
+          PARAM1: VALUE
+      Events:
+        SaveOrder:
+          Type: Api
+          Properties:
+            Path: /order
+            Method: post
+      Policies:
+      - Statement:
+        - Sid: DynamoDBWritePolicy
+          Effect: Allow
+          Action:
+          - dynamodb:*
+          Resource:
+          - Fn::Sub: arn:${AWS::Partition}:dynamodb:${AWS::Region}:${AWS::AccountId}:table/order
+          - Fn::Sub: arn:${AWS::Partition}:dynamodb:${AWS::Region}:${AWS::AccountId}:table/customer
+      - Statement:
+          Effect: Allow
+          Action:
+          - ses:SendEmail
+          - ses:SendRawEmail
+          - ses:VerifyEmailIdentity
+          - ses:GetIdentityVerificationAttributes
+          Resource:
+          - Fn::Sub: arn:${AWS::Partition}:ses:${AWS::Region}:${AWS::AccountId}:identity/matheusilvacesar@gmail.com
+  GetOrderService:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: GetOrderService
+      Handler: getorder.App::handleRequest
+      Runtime: java11
+      MemorySize: 512
+      Environment:
+        Variables:
+          PARAM1: VALUE
+      Events:
+        GetOrder:
+          Type: Api
+          Properties:
+            Path: /order
+            Method: get
+      Policies:
+      - Statement:
+        - Sid: DynamoDBWritePolicy
+          Effect: Allow
+          Action:
+          - dynamodb:*
+          Resource:
+          - Fn::Sub: arn:${AWS::Partition}:dynamodb:${AWS::Region}:${AWS::AccountId}:table/order
+  GetItemService:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: GetItemService
+      Handler: getitem.App::handleRequest
+      Runtime: java11
+      MemorySize: 512
+      Environment:
+        Variables:
+          PARAM1: VALUE
+      Events:
+        GetItem:
+          Type: Api
+          Properties:
+            Path: /item
+            Method: get
+      Policies:
+      - Statement:
+        - Sid: DynamoDBWritePolicy
+          Effect: Allow
+          Action:
+          - dynamodb:*
+          Resource:
+          - Fn::Sub: arn:${AWS::Partition}:dynamodb:${AWS::Region}:${AWS::AccountId}:table/orderitem
+  GetSalesmanService:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: GetSalesmanService
+      Handler: getsalesman.App::handleRequest
+      Runtime: java11
+      MemorySize: 512
+      Environment:
+        Variables:
+          PARAM1: VALUE
+      Events:
+        GetSalesman:
+          Type: Api
+          Properties:
+            Path: /salesman
+            Method: get
+      Policies:
+      - Statement:
+        - Sid: DynamoDBWritePolicy
+          Effect: Allow
+          Action:
+          - dynamodb:*
+          Resource:
+          - Fn::Sub: arn:${AWS::Partition}:dynamodb:${AWS::Region}:${AWS::AccountId}:table/salesman
